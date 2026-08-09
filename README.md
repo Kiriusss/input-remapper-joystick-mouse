@@ -67,8 +67,8 @@ input-remapper-control --command start \
     "output_type": 2,
     "output_code": 0,
     "mapping_type": "analog",
-    "gain": 0.2,        // 速度：0~1 浮点，越大越快
-    "deadzone": 0,      // 死区：0~1，吃掉的轴行程比例（默认 0.1！）
+    "gain": 0.18,       // 速度：0~1 浮点，越大越快
+    "deadzone": 0.03,   // 死区：0~1，吃掉的轴行程比例（默认 0.1！）
     "expo": 0.4         // 曲线：0 线性；>0 小行程压软、大行程保持
 }
 ```
@@ -77,7 +77,7 @@ input-remapper-control --command start \
 
 - **`gain`** — 输出速度乘数。整体快慢就调它。
 - **`deadzone`** — 死区，默认 `0.1`（吃掉最内圈 10% 行程，会感觉"推了没反应"）。
-  `0` = 完全无死区（若摇杆有轻微漂移建议回 0.01~0.02）。
+  `0` = 完全无死区。**不建议设为 0**：摇杆中心附近天然有 ±几单位的抖动，deadzone=0 会把每次抖动都放大成鼠标事件，导致光标持续漂移/某轴偏快（表现为"注入后变快"）。`0.03` 足以吃掉抖动且几乎无感。
 - **`expo`** — 响应曲线（`f(x) = (1-k)·x + k·x³`，k∈[0,1]）：
   - `0`：线性，小推多少走多少
   - `0.4`（推荐）：小行程压软 → 微调精度高；推满时仍 100% 速度
@@ -87,9 +87,9 @@ input-remapper-control --command start \
 
 | 场景 | gain | deadzone | expo |
 |---|---|---|---|
-| 精细操作（本仓库默认） | 0.2 | 0 | 0.4 |
-| 追求速度 | 0.3~0.5 | 0.02 | 0.2 |
-| 摇杆漂移严重 | 0.2 | 0.03 | 0.4 |
+| 精细操作（本仓库默认） | 0.18 | 0.03 | 0.4 |
+| 追求速度 | 0.3~0.5 | 0.03 | 0.2 |
+| 摇杆漂移严重 | 0.2 | 0.05 | 0.4 |
 
 ---
 
@@ -111,6 +111,7 @@ input-remapper-control --command start \
 2. **服务重启后映射不恢复**：`input-remapper-daemon.service` 是系统级 root 服务，重启后不会自动注入 preset，要重跑 `input-remapper-control --command start ...`。
 3. **KWin 加速不持久**：DBus 设置是运行时状态，重启后丢失，必须靠 autostart 钩子重打。
 4. **gain 的历史渊源**：v1.5 配置里的 `pointer_speed: 80` 迁移到 v2 就是 `gain: 0.8`（80/100）。
+5. **"注入后就变快/某轴偏快"其实是死区**：deadzone=0 时，摇杆中心 ±几单位的硬件抖动会被手柄驱动 ~236Hz 轮询持续放大成鼠标移动流。排查方法：`sudo python3 -c "import evdev,time; d=evdev.InputDevice('/dev/input/event21'); [print(e) for _ in range(3) for e in d.read()]"`（注入器 grab 了物理设备，读不到源，但虚拟鼠标事件可见）。修复：deadzone 0.03（见上）。
 
 ## License
 

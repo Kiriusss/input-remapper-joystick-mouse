@@ -91,8 +91,8 @@
         "output_type": 2,
         "output_code": 0,
         "mapping_type": "analog",
-        "gain": 0.2,
-        "deadzone": 0,
+        "gain": 0.18,
+        "deadzone": 0.03,
         "expo": 0.4
     },
     {
@@ -106,8 +106,8 @@
         "output_type": 2,
         "output_code": 1,
         "mapping_type": "analog",
-        "gain": 0.2,
-        "deadzone": 0,
+        "gain": 0.18,
+        "deadzone": 0.03,
         "expo": 0.4
     },
     {
