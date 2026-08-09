@@ -1,0 +1,141 @@
+[
+    {
+        "input_combination": [
+            {
+                "type": 1,
+                "code": 304
+            }
+        ],
+        "target_uinput": "mouse",
+        "output_symbol": "BTN_LEFT",
+        "mapping_type": "key_macro"
+    },
+    {
+        "input_combination": [
+            {
+                "type": 1,
+                "code": 305
+            }
+        ],
+        "target_uinput": "mouse",
+        "output_symbol": "BTN_RIGHT",
+        "mapping_type": "key_macro"
+    },
+    {
+        "input_combination": [
+            {
+                "type": 1,
+                "code": 310
+            }
+        ],
+        "target_uinput": "mouse",
+        "output_symbol": "BTN_MIDDLE",
+        "mapping_type": "key_macro"
+    },
+    {
+        "input_combination": [
+            {
+                "type": 3,
+                "code": 16,
+                "analog_threshold": -1
+            }
+        ],
+        "target_uinput": "mouse",
+        "output_symbol": "wheel(left, 1)",
+        "mapping_type": "key_macro"
+    },
+    {
+        "input_combination": [
+            {
+                "type": 3,
+                "code": 16,
+                "analog_threshold": 1
+            }
+        ],
+        "target_uinput": "mouse",
+        "output_symbol": "wheel(right, 1)",
+        "mapping_type": "key_macro"
+    },
+    {
+        "input_combination": [
+            {
+                "type": 3,
+                "code": 17,
+                "analog_threshold": -1
+            }
+        ],
+        "target_uinput": "mouse",
+        "output_symbol": "wheel(up, 1)",
+        "mapping_type": "key_macro"
+    },
+    {
+        "input_combination": [
+            {
+                "type": 3,
+                "code": 17,
+                "analog_threshold": 1
+            }
+        ],
+        "target_uinput": "mouse",
+        "output_symbol": "wheel(down, 1)",
+        "mapping_type": "key_macro"
+    },
+    {
+        "input_combination": [
+            {
+                "type": 3,
+                "code": 0
+            }
+        ],
+        "target_uinput": "mouse",
+        "output_type": 2,
+        "output_code": 0,
+        "mapping_type": "analog",
+        "gain": 0.2,
+        "deadzone": 0,
+        "expo": 0.4
+    },
+    {
+        "input_combination": [
+            {
+                "type": 3,
+                "code": 1
+            }
+        ],
+        "target_uinput": "mouse",
+        "output_type": 2,
+        "output_code": 1,
+        "mapping_type": "analog",
+        "gain": 0.2,
+        "deadzone": 0,
+        "expo": 0.4
+    },
+    {
+        "input_combination": [
+            {
+                "type": 3,
+                "code": 3
+            }
+        ],
+        "target_uinput": "mouse",
+        "output_type": 2,
+        "output_code": 12,
+        "mapping_type": "analog",
+        "gain": 2.0,
+        "deadzone": 0
+    },
+    {
+        "input_combination": [
+            {
+                "type": 3,
+                "code": 4
+            }
+        ],
+        "target_uinput": "mouse",
+        "output_type": 2,
+        "output_code": 11,
+        "mapping_type": "analog",
+        "gain": 0.5,
+        "deadzone": 0
+    }
+]

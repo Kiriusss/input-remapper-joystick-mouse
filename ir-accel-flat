@@ -1,0 +1,16 @@
+#!/bin/bash
+# 把 input-remapper 虚拟鼠标的指针加速改成 flat(线性),去掉自适应加速
+# 用法: 注入成功后调用; 找不到设备则重试最多 10 秒
+for i in $(seq 1 20); do
+    node=""
+    for ev in /sys/class/input/event*; do
+        [ "$(cat "$ev/device/name" 2>/dev/null)" = "input-remapper mouse" ] && node="${ev##*/}"
+    done
+    [ -n "$node" ] && break
+    sleep 0.5
+done
+[ -z "$node" ] && { echo "ir-accel-flat: input-remapper mouse not found" >&2; exit 1; }
+
+busctl --user set-property org.kde.KWin "/org/kde/KWin/InputDevice/$node" org.kde.KWin.InputDevice pointerAccelerationProfileFlat b 1
+busctl --user set-property org.kde.KWin "/org/kde/KWin/InputDevice/$node" org.kde.KWin.InputDevice pointerAcceleration d 0
+echo "ir-accel-flat: flat accel applied on $node"

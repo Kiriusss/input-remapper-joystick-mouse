@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Input Remapper Gamepad
+Comment=Apply gamepad desktop mapping at login (inject + flat pointer acceleration)
+Exec=/bin/bash -c 'sleep 5; for i in 1 2 3 4 5; do input-remapper-control --command start --device "Microsoft X-Box 360 pad" --preset desktop >/dev/null 2>&1 && { __HOME__/.local/bin/ir-accel-flat; exit 0; }; sleep 3; done'
+X-GNOME-Autostart-enabled=true
